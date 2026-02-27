@@ -10,6 +10,7 @@ set(IMGUI_DIR ..)
 
 set(SOURCES
     main.cpp
+    gui/gui_init.cpp
     ${IMGUI_DIR}/imgui.cpp
     ${IMGUI_DIR}/imgui_draw.cpp
     ${IMGUI_DIR}/imgui_demo.cpp
