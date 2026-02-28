@@ -42,24 +42,3 @@ void Engine::parseFileIncremental()
 	TraceManager newBlock = tp.ParseBlock(lines);
 	tm.updateBlock(newBlock);
 }
-
-int main(int argc, char *argv[])
-{
-	Engine *e = new Engine();
-	e->parseFileSync("../../assets/trace_logs/code.log");
-	std::cout << "追加" << std::endl;
-	e->parseFileIncremental();
-	std::cout << "追加" << std::endl;
-	e->parseFileIncremental();
-	std::cout << "追加" << std::endl;
-	e->parseFileIncremental();
-	std::cout << "追加" << std::endl;
-	e->parseFileIncremental();
-	std::cout << "追加" << std::endl;
-	e->parseFileIncremental();
-	std::cout << "追加" << std::endl;
-	e->parseFileIncremental();
-
-	delete e;
-	return 0;
-}

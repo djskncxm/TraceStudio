@@ -3,7 +3,9 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "tinyfiledialogs.h"
 
+#include <iostream>
 #include <GLFW/glfw3.h>
 
 // 设置主题和字体
@@ -88,30 +90,49 @@ void DrawMainWindow()
 			}
 			ImGui::EndMenu();
 		}
+
+		if (ImGui::BeginMenu("帮助")) // Edit 菜单
+		{
+			if (ImGui::MenuItem("使用教程")) { /* 复制逻辑 */
+			}
+			if (ImGui::MenuItem("提交PR")) {
+			}
+			if (ImGui::MenuItem("提交需求")) {
+			}
+			ImGui::EndMenu();
+		}
 		ImGui::EndMenuBar(); // 结束菜单栏
 	}
 
 	// 计算宽度
 	float window_width = ImGui::GetContentRegionAvail().x;
-	float child_width  = window_width / 3.0f;
 
-	// 左侧
-	ImGui::BeginChild("Left", ImVec2(child_width, 0), true);
-	for (int i = 1; i <= 100; ++i) {
-		ImGui::Text("Item %d", i); // 显示文本
+	ImGui::BeginChild("Left", ImVec2(window_width / 6, 0), true);
+	ImGui::Dummy(ImVec2(0, 20));
+	const char *text = "TraceStudio";
+	DrawScaledText(text, window_width);
+	ImGui::Dummy(ImVec2(0, 30));
+	std::string selectedFile;
+
+	if (ImGui::Button("选择文件")) {
+		const char *filename = tinyfd_openFileDialog(
+			"选择文件", // 对话框标题
+			"", // 默认路径
+			0,
+			NULL,
+			NULL,
+			0); // 过滤器，这里不限制
+		if (filename) {
+			std::cout << "选择的文件: " << filename << "\n";
+			selectedFile = filename;
+		}
 	}
-	ImGui::EndChild();
-	ImGui::SameLine();
 
-	// 中间
-	ImGui::BeginChild("Center", ImVec2(child_width, 0), true);
-	ImGui::Text("中间内容");
-	ImGui::EndChild();
-	ImGui::SameLine();
+	if (ImGui::Button("按钮2")) {
+		// 点击按钮2的处理
+		std::cout << "按钮2被点击\n";
+	}
 
-	// 右侧
-	ImGui::BeginChild("Right", ImVec2(0, 0), true); // 最后一个用剩余空间
-	ImGui::Text("右侧内容");
 	ImGui::EndChild();
 
 	ImGui::End();
@@ -149,4 +170,28 @@ void Cleanup(GLFWwindow *window)
 	ImGui::DestroyContext();
 	glfwDestroyWindow(window);
 	glfwTerminate();
+}
+void DrawScaledText(const char *text, float windowWidth, float scale, float divisor)
+{
+	// 推入当前字体（保持字体堆栈一致，避免影响外部字体设置）
+	ImGui::PushFont(ImGui::GetFont());
+
+	// 设置窗口字体缩放
+	ImGui::SetWindowFontScale(scale);
+
+	// 计算文本宽度
+	float textWidth = ImGui::CalcTextSize(text).x;
+
+	// 根据公式 (windowWidth/divisor - textWidth) * 0.5f 计算水平起始位置
+	float xPos = (windowWidth / divisor - textWidth) * 0.5f;
+	ImGui::SetCursorPosX(xPos);
+
+	// 绘制文本
+	ImGui::Text("%s", text);
+
+	// 恢复字体缩放为1.0
+	ImGui::SetWindowFontScale(1.0f);
+
+	// 弹出字体，恢复之前的字体状态
+	ImGui::PopFont();
 }

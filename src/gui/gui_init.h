@@ -12,3 +12,5 @@ void DrawMainWindow();
 void RenderFrame(GLFWwindow *window);
 
 void Cleanup(GLFWwindow *window);
+
+void DrawScaledText(const char *text, float windowWidth, float scale = 1.5f, float divisor = 6.0f);
