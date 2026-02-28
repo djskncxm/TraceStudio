@@ -9,6 +9,21 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
+enum class AppPage
+{
+	StartupPage, // 启动页
+	WorkPage // 工作页
+};
+
+struct AppState
+{
+	AppPage	    currentPage = AppPage::StartupPage;
+	std::string currentFile; // 当前打开的文件路径
+};
+
+// 全局状态（实际项目可封装为单例或上下文）
+static AppState g_appState;
+
 // 设置主题和字体
 void SetupGuiThemeAndFonts()
 {
@@ -83,6 +98,10 @@ void DrawFileMenu()
 
 	if (ImGui::MenuItem("Open", "Ctrl+O")) {
 		std::string fn = GetFileName();
+		if (!fn.empty()) {
+			g_appState.currentFile = fn;
+			g_appState.currentPage = AppPage::WorkPage; // 打开文件后自动切换到工作页
+		}
 	}
 
 	if (ImGui::MenuItem("Save", "Ctrl+S")) {
@@ -150,6 +169,11 @@ void DrawOpenFileButton()
 
 	if (StyledButton("选择文件", ImVec2(200, 60))) {
 		std::string selectedFile = GetFileName();
+
+		if (!selectedFile.empty()) {
+			g_appState.currentFile = selectedFile;
+			g_appState.currentPage = AppPage::WorkPage; // 切换到工作页
+		}
 	}
 }
 void DrawLeftPanel(float window_width)
@@ -161,13 +185,27 @@ void DrawLeftPanel(float window_width)
 	DrawOpenFileButton();
 }
 
+void DrawWorkPanel()
+{
+}
+
 void DrawMainLayout()
 {
 	float window_width = ImGui::GetContentRegionAvail().x;
+	if (g_appState.currentPage == AppPage::StartupPage) {
+		ImGui::BeginChild("LeftPanel", ImVec2(window_width / 6, 0), true);
+		DrawLeftPanel(window_width); // 注意传入的是主窗口宽度，用于居中文字
+		ImGui::EndChild();
 
-	ImGui::BeginChild("Left", ImVec2(window_width / 6, 0), true);
-	DrawLeftPanel(window_width);
-	ImGui::EndChild();
+		ImGui::SameLine(); // 左右并排
+
+		// 右侧面板 (占剩余宽度)
+		ImGui::BeginChild("RightPanel", ImVec2(0, 0), true);
+		DrawStartupRightPanel();
+		ImGui::EndChild();
+	} else if (g_appState.currentPage == AppPage::WorkPage) {
+		std::cout << "工作分区" << '\n';
+	}
 }
 
 void DrawMainWindow()
@@ -256,4 +294,26 @@ std::string GetFileName()
 		selectedFile = filename;
 	}
 	return selectedFile;
+}
+
+void DrawStartupRightPanel()
+{
+	float availWidth  = ImGui::GetContentRegionAvail().x;
+	float availHeight = ImGui::GetContentRegionAvail().y;
+
+	// 临时放大字体（例如 1.5 倍）
+	ImGui::SetWindowFontScale(1.5f);
+
+	const char *text = "欢迎使用 TraceStudio\n请从左侧打开一个文件，或使用菜单 File -> Open 开始工作。";
+	// 计算文本实际占用的宽高（考虑自动换行，限制最大宽度为 availWidth）
+	ImVec2 textSize = ImGui::CalcTextSize(text, nullptr, false, availWidth);
+
+	// 设置光标位置使文本居中
+	ImGui::SetCursorPos(ImVec2((availWidth - textSize.x) * 0.5f, (availHeight - textSize.y) * 0.5f));
+
+	// 绘制文本（自动换行）
+	ImGui::TextWrapped("%s", text);
+
+	// 恢复字体缩放，避免影响后续绘制
+	ImGui::SetWindowFontScale(1.0f);
 }
