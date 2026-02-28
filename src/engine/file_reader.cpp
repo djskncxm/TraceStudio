@@ -1,37 +1,35 @@
 #include "file_reader.h"
 #include <string>
 
-std::string IFileReader::ReadLine()
+std::vector<std::string> IFileReader::ReadBlock(uint64_t from, uint64_t to)
 {
-	std::string line;
-	if (std::getline(istream, line))
-		return line;
-	else
-		return "";
-}
-
-std::vector<std::string> IFileReader::ReadBlock(int from, int to)
-{
-	if (from > to || from < 0) {
+	if (from > to || from < 0 || to >= line_offsets.size()) {
 		throw std::invalid_argument("行区间不合法");
 	}
 
-	std::vector<std::string> result;
+	std::vector<std::string> result(to - from + 1);
+
+	istream.clear();
+	istream.seekg(line_offsets[from], std::ios::beg); // 只 seek 一次
+
+	for (int i = 0; i <= to - from; ++i) {
+		std::getline(istream, result[i]);
+	}
+
+	return result;
+}
+
+void IFileReader::BuildOffsetTable()
+{
+	line_offsets.clear();
 	istream.clear();
 	istream.seekg(0, std::ios::beg);
 
 	std::string line;
-	int	    line_num = 0;
+	uint64_t    offset = 0;
 
 	while (std::getline(istream, line)) {
-		if (line_num >= from && line_num <= to) {
-			result.push_back(line);
-		}
-		if (line_num > to) {
-			break; // 已读完目标区间
-		}
-		++line_num;
+		line_offsets.push_back(offset);
+		offset = istream.tellg();
 	}
-
-	return result;
 }

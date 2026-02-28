@@ -1,146 +1,155 @@
 [
   {
     "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
       "-Wall",
-      "-Wformat",
+      "-g",
       "-c",
       "-o",
-      "imgui_impl_glfw.o",
-      "../backends/imgui_impl_glfw.cpp"
+      "CMakeFiles/TraceStudio.dir/main.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/src/main.cpp"
     ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
-    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_glfw.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui_impl_glfw.o"
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/main.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/main.cpp.o"
   },
   {
     "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
       "-Wall",
-      "-Wformat",
+      "-g",
       "-c",
       "-o",
-      "imgui_draw.o",
-      "../imgui_draw.cpp"
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_opengl3.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_opengl3.cpp"
     ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
-    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_draw.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui_draw.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
-      "-Wall",
-      "-Wformat",
-      "-c",
-      "-o",
-      "imgui_tables.o",
-      "../imgui_tables.cpp"
-    ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
-    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_tables.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui_tables.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
-      "-Wall",
-      "-Wformat",
-      "-c",
-      "-o",
-      "imgui_widgets.o",
-      "../imgui_widgets.cpp"
-    ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
-    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_widgets.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui_widgets.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
-      "-Wall",
-      "-Wformat",
-      "-c",
-      "-o",
-      "imgui_demo.o",
-      "../imgui_demo.cpp"
-    ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
-    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_demo.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui_demo.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
-      "-Wall",
-      "-Wformat",
-      "-c",
-      "-o",
-      "imgui_impl_opengl3.o",
-      "../backends/imgui_impl_opengl3.cpp"
-    ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
     "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_opengl3.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui_impl_opengl3.o"
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_opengl3.cpp.o"
   },
   {
     "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
       "-Wall",
-      "-Wformat",
+      "-g",
       "-c",
       "-o",
-      "main.o",
-      "main.cpp"
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_glfw.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_glfw.cpp"
     ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
-    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/main.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/main.o"
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_glfw.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/backends/imgui_impl_glfw.cpp.o"
   },
   {
     "arguments": [
-      "/usr/bin/g++",
-      "-std=c++11",
-      "-I..",
-      "-I../backends",
-      "-g",
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
       "-Wall",
-      "-Wformat",
+      "-g",
       "-c",
       "-o",
-      "imgui.o",
-      "../imgui.cpp"
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_widgets.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_widgets.cpp"
     ],
-    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3",
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_widgets.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_widgets.cpp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_tables.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_tables.cpp"
+    ],
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_tables.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_tables.cpp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_demo.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_demo.cpp"
+    ],
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_demo.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_demo.cpp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "CMakeFiles/TraceStudio.dir/gui/gui_init.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/src/gui/gui_init.cpp"
+    ],
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/gui/gui_init.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/gui/gui_init.cpp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui.cpp"
+    ],
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
     "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui.cpp",
-    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/example_glfw_opengl3/imgui.o"
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui.cpp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/..",
+      "-I/home/duck/NewCode/C/C/Projects/TraceStudio/src/../backends",
+      "-std=gnu++11",
+      "-Wall",
+      "-g",
+      "-c",
+      "-o",
+      "CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_draw.cpp.o",
+      "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_draw.cpp"
+    ],
+    "directory": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build",
+    "file": "/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_draw.cpp",
+    "output": "/home/duck/NewCode/C/C/Projects/TraceStudio/src/build/CMakeFiles/TraceStudio.dir/home/duck/NewCode/C/C/Projects/TraceStudio/imgui_draw.cpp.o"
   }
 ]

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(TraceStudio)
 
-# 使用 C++17
+# 使用 C++ 11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

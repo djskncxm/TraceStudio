@@ -1,18 +1,27 @@
 #pragma once
 
-#include <functional>
-#include <vector>
-#include <string>
+#include <memory>
 #include "file_reader.h"
-
 #include "model/trace_parser.h"
+#include <string>
 
 class Engine
 {
     public:
-	Engine();
-	~Engine();
-	void			 parseFileAsync(IFileReader *reader, size_t batchSize, std::function<void(const std::vector<TraceManger> &)> onBatch, std::function<void(const std::string &)> onError);
-	std::vector<TraceManger> parseFileSync(IFileReader *reader);
-	void			 test();
+	int windowSize = 3000;
+	Engine()       = default;
+	~Engine()      = default;
+	void parseFileSync(std::string FilenPath);
+
+	void		    parseFileIncremental();
+	const TraceManager &getTraceManager() const
+	{
+		return tm;
+	}
+
+    private:
+	TraceManager		     tm;
+	std::unique_ptr<IFileReader> reader;
+	std::string		     currentFile;
+	size_t			     currentLine = 0; // 已解析的行数
 };

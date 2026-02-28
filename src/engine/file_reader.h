@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 class IFileReader
 {
@@ -14,6 +15,7 @@ class IFileReader
 		if (!istream.is_open()) {
 			throw std::runtime_error("无法打开文件: " + filename);
 		}
+		BuildOffsetTable();
 	}
 
 	~IFileReader()
@@ -21,9 +23,14 @@ class IFileReader
 		istream.close();
 	}
 
-	std::string		 ReadLine();
-	std::vector<std::string> ReadBlock(int from, int to);
+	std::vector<std::string> ReadBlock(uint64_t from, uint64_t to);
+	size_t			 TotalLines() const
+	{
+		return line_offsets.size();
+	}
 
     private:
-	std::ifstream istream;
+	std::vector<uint64_t> line_offsets;
+	std::ifstream	      istream;
+	void		      BuildOffsetTable();
 };

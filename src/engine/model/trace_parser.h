@@ -1,31 +1,49 @@
-// engine/parser/trace_parser.h
 #pragma once
-#include <string>
-#include <vector>
 
 #include <string>
 #include <vector>
 #include <cstdint>
 
-struct TraceManger
+#define REG_BIT_X(i) (1u << (i))
+#define REG_BIT_SP (1u << 31)
+
+struct RegistersARM64
 {
-	int			 id;
-	std::string		 type;
-	std::string		 description;
-	uint64_t		 timestamp;
-	std::vector<std::string> details; // 可用于表格或树节点显示
+	uint64_t x[31]; // x0–x30
+	uint64_t sp;
+	uint64_t pc;
+	uint32_t pstate;
 };
 
 struct TraceLine
 {
+	int	       Line;
+	uint64_t       Offset;
+	uint64_t       Address;
+	std::string    Description;
+	uint32_t       reg_changed_mask;
+	RegistersARM64 Register;
+};
+
+struct TraceManager
+{
+	std::vector<TraceLine> Instructions;
+	int		       CurrentIndex;
+	uint64_t	       loaded_begin;
+	uint64_t	       loaded_end;
+	std::string	       FileName;
+	int		       windowSize;
+	bool		       isLoading;
+	TraceManager	      &updateBlock(const TraceManager &other);
 };
 
 class TraceParser
 {
     public:
-	// 解析单行日志
-	TraceManger parseLine(const std::string &line);
+	TraceParser() = default;
+	TraceManager ParseBlock(const std::vector<std::string> &lines);
 
-	// 解析一批日志
-	std::vector<TraceManger> parseLines(const std::vector<std::string> &lines);
+    private:
+	TraceLine      ParseLine(const std::string &line);
+	RegistersARM64 ParseRegisters(std::vector<std::string> &reg_text);
 };
