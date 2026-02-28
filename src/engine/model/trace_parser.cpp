@@ -37,19 +37,21 @@ static uint32_t CalcChangedMask(const RegistersARM64 &prev, const RegistersARM64
 TraceManager TraceParser::ParseBlock(const std::vector<std::string> &lines)
 {
 	TraceManager manager;
-	size_t	     prev = SIZE_MAX;
+	TraceLine    prevLine;
+	bool	     hasPrev = false;
 
 	for (const std::string &line : lines) {
 		TraceLine traceLine = ParseLine(line);
 
-		if (prev != SIZE_MAX) {
-			traceLine.reg_changed_mask = CalcChangedMask(manager.Instructions[prev].Register, traceLine.Register);
+		if (hasPrev) {
+			traceLine.reg_changed_mask = CalcChangedMask(prevLine.Register, traceLine.Register);
 		} else {
 			traceLine.reg_changed_mask = 0;
 		}
 
 		manager.Instructions.push_back(std::move(traceLine));
-		prev = manager.Instructions.size() - 1;
+		prevLine = manager.Instructions.back();
+		hasPrev	 = true;
 	}
 
 	if (!manager.Instructions.empty()) {
@@ -66,10 +68,13 @@ TraceManager &TraceManager::updateBlock(const TraceManager &other)
 		throw std::invalid_argument("Cannot append TraceManager to itself");
 	}
 
-	// 只保留当前加载块
+	this->PrevLine	   = this->Instructions;
 	this->Instructions = other.Instructions;
 	this->loaded_begin = other.loaded_begin;
 	this->loaded_end   = other.loaded_end;
+	if (!this->PrevLine.empty() && !this->Instructions.empty()) {
+		this->Instructions[0].reg_changed_mask = CalcChangedMask(this->PrevLine.back().Register, this->Instructions[0].Register);
+	}
 
 	return *this;
 }

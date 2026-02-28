@@ -28,6 +28,7 @@ struct TraceLine
 struct TraceManager
 {
 	std::vector<TraceLine> Instructions;
+	std::vector<TraceLine> PrevLine;
 	int		       CurrentIndex;
 	uint64_t	       loaded_begin;
 	uint64_t	       loaded_end;
