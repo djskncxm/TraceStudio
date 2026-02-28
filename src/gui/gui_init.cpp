@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include <string>
 
 // 设置主题和字体
 void SetupGuiThemeAndFonts()
@@ -57,83 +58,126 @@ void InitImGui(GLFWwindow *window)
 	SetupGuiThemeAndFonts();
 }
 
-// 窗口绘制
-void DrawMainWindow()
+void SetupMainWindow()
 {
-	ImGuiWindowFlags main_flags = ImGuiWindowFlags_MenuBar;
-	ImGuiViewport	*viewport   = ImGui::GetMainViewport();
+	ImGuiViewport *viewport = ImGui::GetMainViewport();
 	ImGui::SetNextWindowPos(viewport->WorkPos);
 	ImGui::SetNextWindowSize(viewport->WorkSize);
-	main_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-	main_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+}
 
-	ImGui::Begin("Main Window", nullptr, main_flags);
+ImGuiWindowFlags GetMainWindowFlags()
+{
+	ImGuiWindowFlags flags = ImGuiWindowFlags_MenuBar;
+	flags |= ImGuiWindowFlags_NoTitleBar;
+	flags |= ImGuiWindowFlags_NoCollapse;
+	flags |= ImGuiWindowFlags_NoResize;
+	flags |= ImGuiWindowFlags_NoMove;
+	flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+	flags |= ImGuiWindowFlags_NoNavFocus;
+	return flags;
+}
+void DrawFileMenu()
+{
+	if (!ImGui::BeginMenu("File"))
+		return;
 
-	if (ImGui::BeginMenuBar()) // 开始菜单栏
-	{
-		if (ImGui::BeginMenu("File")) // File 菜单
-		{
-			if (ImGui::MenuItem("Open", "Ctrl+O")) { /* 打开文件逻辑 */
-			}
-			if (ImGui::MenuItem("Save", "Ctrl+S")) { /* 保存逻辑 */
-			}
-			if (ImGui::MenuItem("Exit")) { /* 退出逻辑 */
-			}
-			ImGui::EndMenu();
-		}
-
-		if (ImGui::BeginMenu("Edit")) // Edit 菜单
-		{
-			if (ImGui::MenuItem("Copy", "Ctrl+C")) { /* 复制逻辑 */
-			}
-			if (ImGui::MenuItem("Paste", "Ctrl+V")) { /* 粘贴逻辑 */
-			}
-			ImGui::EndMenu();
-		}
-
-		if (ImGui::BeginMenu("帮助")) // Edit 菜单
-		{
-			if (ImGui::MenuItem("使用教程")) { /* 复制逻辑 */
-			}
-			if (ImGui::MenuItem("提交PR")) {
-			}
-			if (ImGui::MenuItem("提交需求")) {
-			}
-			ImGui::EndMenu();
-		}
-		ImGui::EndMenuBar(); // 结束菜单栏
+	if (ImGui::MenuItem("Open", "Ctrl+O")) {
+		std::string fn = GetFileName();
 	}
 
-	// 计算宽度
+	if (ImGui::MenuItem("Save", "Ctrl+S")) {
+	}
+
+	// if (ImGui::MenuItem("Exit")) { }
+
+	ImGui::EndMenu();
+}
+
+void DrawEditMenu()
+{
+	if (ImGui::BeginMenu("Edit")) // Edit 菜单
+	{
+		if (ImGui::MenuItem("Copy", "Ctrl+C")) { /* 复制逻辑 */
+		}
+		if (ImGui::MenuItem("Paste", "Ctrl+V")) { /* 粘贴逻辑 */
+		}
+		ImGui::EndMenu();
+	}
+}
+void DrawHelpMenu()
+{
+	if (ImGui::BeginMenu("帮助")) // Edit 菜单
+	{
+		if (ImGui::MenuItem("使用教程")) { /* 复制逻辑 */
+		}
+		if (ImGui::MenuItem("提交PR")) {
+		}
+		if (ImGui::MenuItem("提交需求")) {
+		}
+		ImGui::EndMenu();
+	}
+}
+
+void DrawMainMenuBar()
+{
+	if (!ImGui::BeginMenuBar())
+		return;
+
+	DrawFileMenu();
+	DrawEditMenu();
+	DrawHelpMenu();
+
+	ImGui::EndMenuBar();
+}
+bool StyledButton(const char *label, ImVec2 size)
+{
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.263f, 0.278f, 0.282f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.313f, 0.328f, 0.332f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.213f, 0.228f, 0.232f, 1.0f));
+	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 7.0f);
+
+	bool clicked = ImGui::Button(label, size);
+
+	ImGui::PopStyleColor(3);
+	ImGui::PopStyleVar();
+
+	return clicked;
+}
+void DrawOpenFileButton()
+{
+	float availWidth = ImGui::GetContentRegionAvail().x;
+	ImGui::SetCursorPosX((availWidth - 200) * 0.5f);
+
+	if (StyledButton("选择文件", ImVec2(200, 60))) {
+		std::string selectedFile = GetFileName();
+	}
+}
+void DrawLeftPanel(float window_width)
+{
+	ImGui::Dummy(ImVec2(0, 20));
+	DrawScaledText("TraceStudio", window_width);
+	ImGui::Dummy(ImVec2(0, 30));
+
+	DrawOpenFileButton();
+}
+
+void DrawMainLayout()
+{
 	float window_width = ImGui::GetContentRegionAvail().x;
 
 	ImGui::BeginChild("Left", ImVec2(window_width / 6, 0), true);
-	ImGui::Dummy(ImVec2(0, 20));
-	const char *text = "TraceStudio";
-	DrawScaledText(text, window_width);
-	ImGui::Dummy(ImVec2(0, 30));
-	std::string selectedFile;
-
-	if (ImGui::Button("选择文件")) {
-		const char *filename = tinyfd_openFileDialog(
-			"选择文件", // 对话框标题
-			"", // 默认路径
-			0,
-			NULL,
-			NULL,
-			0); // 过滤器，这里不限制
-		if (filename) {
-			std::cout << "选择的文件: " << filename << "\n";
-			selectedFile = filename;
-		}
-	}
-
-	if (ImGui::Button("按钮2")) {
-		// 点击按钮2的处理
-		std::cout << "按钮2被点击\n";
-	}
-
+	DrawLeftPanel(window_width);
 	ImGui::EndChild();
+}
+
+void DrawMainWindow()
+{
+	SetupMainWindow();
+
+	if (ImGui::Begin("Main Window", nullptr, GetMainWindowFlags())) {
+		DrawMainMenuBar();
+		DrawMainLayout();
+	}
 
 	ImGui::End();
 }
@@ -171,6 +215,7 @@ void Cleanup(GLFWwindow *window)
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
+
 void DrawScaledText(const char *text, float windowWidth, float scale, float divisor)
 {
 	// 推入当前字体（保持字体堆栈一致，避免影响外部字体设置）
@@ -194,4 +239,21 @@ void DrawScaledText(const char *text, float windowWidth, float scale, float divi
 
 	// 弹出字体，恢复之前的字体状态
 	ImGui::PopFont();
+}
+// 打开文件管理器获取文件
+std::string GetFileName()
+{
+	std::string selectedFile;
+	const char *filename = tinyfd_openFileDialog(
+		"选择文件", // 对话框标题
+		"", // 默认路径
+		0,
+		NULL,
+		NULL,
+		0); // 过滤器，这里不限制
+	if (filename) {
+		std::cout << "选择的文件: " << filename << "\n";
+		selectedFile = filename;
+	}
+	return selectedFile;
 }
