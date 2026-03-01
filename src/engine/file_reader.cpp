@@ -12,7 +12,7 @@ std::vector<std::string> IFileReader::ReadBlock(uint64_t from, uint64_t to)
 	istream.clear();
 	istream.seekg(line_offsets[from], std::ios::beg); // 只 seek 一次
 
-	for (int i = 0; i <= to - from; ++i) {
+	for (size_t i = 0; i <= to - from; ++i) {
 		std::getline(istream, result[i]);
 	}
 

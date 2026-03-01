@@ -10,7 +10,8 @@ set(IMGUI_DIR ..)
 
 set(SOURCES
     main.cpp
-    gui/gui_init.cpp
+    gui/init.cpp
+    gui/work.cpp
     gui/tinyfiledialogs.c
     engine/engine.cpp
     engine/file_reader.cpp
