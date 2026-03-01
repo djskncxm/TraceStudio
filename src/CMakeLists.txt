@@ -14,8 +14,8 @@ set(SOURCES
     gui/work.cpp
     gui/tinyfiledialogs.c
     engine/engine.cpp
-    engine/file_reader.cpp
-    engine/model/trace_parser.cpp
+    io/file_reader.cpp
+    parser/trace_parser.cpp
     ${IMGUI_DIR}/imgui.cpp
     ${IMGUI_DIR}/imgui_draw.cpp
     ${IMGUI_DIR}/imgui_demo.cpp

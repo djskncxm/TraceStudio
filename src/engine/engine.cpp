@@ -1,9 +1,8 @@
 #include <memory>
-#include <iostream>
 
 #include "engine.h"
-#include "file_reader.h"
-#include "model/trace_parser.h"
+#include "../io/file_reader.h"
+#include "../parser/trace_parser.h"
 
 void Engine::parseFileSync(std::string FilePath)
 {

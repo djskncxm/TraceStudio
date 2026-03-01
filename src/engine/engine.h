@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "file_reader.h"
-#include "model/trace_parser.h"
+#include "../io/file_reader.h"
+#include "../parser/trace_parser.h"
 #include <string>
 
 class Engine

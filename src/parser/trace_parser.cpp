@@ -4,7 +4,6 @@
 #include <cassert>
 #include <cctype>
 #include <algorithm>
-#include <iostream>
 
 #include "trace_parser.h"
 
